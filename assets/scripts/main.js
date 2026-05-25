@@ -65,24 +65,18 @@ function initializeServiceWorker() {
  * @returns {Array<Object>} An array of recipes found in localStorage
  */
 async function getRecipes() {
-  // EXPOSE - START (All expose numbers start with A)
-  // A1. TODO - Check local storage to see if there are any recipes.
-  //            If there are recipes, return them.
+  // EXPOSE SECTION
+  // A1. Get recipes from local storage
   const stored_recipes = localStorage.getItem("recipes");
   if (stored_recipes){
     return JSON.parse(stored_recipes);
   }
 
-  /**************************/
-  // The rest of this method will be concerned with requesting the recipes
-  // from the network
-  // A2. TODO - Create an empty array to hold the recipes that you will fetch
+  // A2. Empty array for info we will fetch
+
   let fetched_recipes = [];
-  // A3. TODO - Return a new Promise. If you are unfamiliar with promises, MDN
-  //            has a great article on them. A promise takes one parameter - A
-  //            function (we call these callback functions). That function will
-  //            take two parameters - resolve, and reject. These are functions
-  //            you can call to either resolve the Promise or Reject it.
+  
+  // A3. Return Promise
   return new Promise(async (resolve, reject) => {
       // A4 - Loop thru const url array
       for (const url of RECIPE_URLS)
@@ -106,8 +100,6 @@ async function getRecipes() {
       // A9
       saveRecipesToStorage(fetched_recipes);
       resolve(fetched_recipes);
-
-
     });
 };
 
